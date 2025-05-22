@@ -7,17 +7,11 @@ const Square = ({ value, onSquareClick }) => {
   return <button className="square"onClick={onSquareClick}>{ value }</button>
 }
 
-// Main board
-const Board = () => {
-  // Turn State
-  const [xIsNext, setIsNext] = useState(true);
-
-  // Top State
-  const [squares, setSquares] = useState(Array(9).fill(null));
-
+// Board component
+export const Board = ({ xIsNext, squares, onPlay}) => {
   // Handler
   const handleSquareClick = (i) => {
-    if (squares[i] || calculateWinner(squares)) {
+    if (calculateWinner(squares) || squares[i] ) {
       return;
     }
 
@@ -26,8 +20,7 @@ const Board = () => {
     // Alternate turns
     xIsNext ? nextSquares[i] = "X" : nextSquares[i] = "O";
     
-    setSquares(nextSquares);
-    setIsNext(!xIsNext);
+    onPlay(nextSquares);
   }
 
   // Display info to user
@@ -70,4 +63,31 @@ const Board = () => {
 );
 }
 
-export default Board;
+
+const Game = () => {
+  // Top state
+  const [xIsNext, setIsNext] = useState(true);
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const currentSquares = history[history.length - 1];
+
+  const handlePlay = (nextSquares) => {
+    setHistory([...history, nextSquares]);
+    setIsNext(!xIsNext);
+  };
+
+  return (
+    <div className="game">
+      <div className="game-board">
+        <Board 
+        xIsNext={xIsNext} 
+        squares={currentSquares} 
+        onPlay={handlePlay} />
+      </div>
+      <div className="game-info">
+        <ol>{/*TODO*/}</ol>
+      </div>
+    </div>
+  )
+}
+
+export default Game;
