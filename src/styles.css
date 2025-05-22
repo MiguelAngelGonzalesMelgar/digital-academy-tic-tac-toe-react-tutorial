@@ -47,20 +47,28 @@ ul {
   padding-inline-start: 20px;
 }
 
+li {
+  font-size: 1.5rem;
+}
+
+button {
+  font-size: 1.5rem;
+}
+
 /* Game Board */
 .square {
   background: #fff;
-  border: 1px solid #999;
+  border: 3px solid #999;
   float: left;
   font-size: 24px;
   font-weight: bold;
   line-height: 34px;
-  height: 34px;
+  height: 120px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 120px;
 }
 
 .board-row:after {
@@ -71,10 +79,13 @@ ul {
 
 .status {
   margin-bottom: 10px;
+  font-size: 2rem;
 }
 .game {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .game-info {
