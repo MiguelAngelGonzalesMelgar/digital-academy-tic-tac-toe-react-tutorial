@@ -12,10 +12,10 @@ const calculateWinner = (squares) => {
     [2, 4, 6],
   ]
   for (const line of lines) {
-    const [a, b, c] = lines[i];
+    const [a, b, c] = line;
     const potentialWinner = squares[a]
     if (potentialWinner && potentialWinner === squares[b] && potentialWinner === squares[c]) {
-      return squares[a];
+      return potentialWinner;
     }
   }
   return null;

@@ -30,8 +30,25 @@ const Board = () => {
     setIsNext(!xIsNext);
   }
 
+  // Display info to user
+  const winner = calculateWinner(squares);
+  const draw = squares.every(square => square !== null);
+
+  let status;
+  if (winner) {
+    status = `Winner: ${winner}`;
+  } else if (draw) {
+    status = "It's a Draw!"
+  } else {
+    status = `Next player: ${xIsNext ? "X" : "O"}`;
+  }
+
+
   return (
     <>
+    <div className="status">
+      <p>{status}</p>
+    </div>
     <div className="board-row">
       <Square value={squares[0]} onSquareClick={() => handleSquareClick(0)}/>
       <Square value={squares[1]} onSquareClick={() => handleSquareClick(1)}/>
