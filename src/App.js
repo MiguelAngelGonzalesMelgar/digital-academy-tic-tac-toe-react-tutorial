@@ -1,4 +1,5 @@
 import { useState } from "react"
+import calculateWinner from "./utils/calculateWinner.js"
 
 // Square component
 const Square = ({ value, onSquareClick }) => {
@@ -8,14 +9,25 @@ const Square = ({ value, onSquareClick }) => {
 
 // Main board
 const Board = () => {
-  // Top state
+  // Turn State
+  const [xIsNext, setIsNext] = useState(true);
+
+  // Top State
   const [squares, setSquares] = useState(Array(9).fill(null));
 
   // Handler
   const handleSquareClick = (i) => {
+    if (squares[i] || calculateWinner(squares)) {
+      return;
+    }
+
     const nextSquares = [...squares];
-    nextSquares[i] = "X";
+
+    // Alternate turns
+    xIsNext ? nextSquares[i] = "X" : nextSquares[i] = "O";
+    
     setSquares(nextSquares);
+    setIsNext(!xIsNext);
   }
 
   return (
